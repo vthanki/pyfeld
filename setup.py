@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
+# coding=UTF-8
 
 import os
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
 
-#https://coderwall.com/p/qawuyq/use-markdown-readme-s-in-python-modules
-#pip install pyandoc
 
 long_description = 'Raumfeld controlled by python scripts'
 here = path.abspath(path.dirname(__file__))
@@ -39,13 +37,13 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    py_modules=['pyfeld'],
+    py_modules=['pyfeld','DirBrowse'],
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['requests', 'readchar', 'urllib3'],
+    install_requires=['requests', 'readchar'],
     #    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     entry_points={
         'console_scripts': [
-            'pyfeld=pyfeld.rfcmd:main',
+            'pyfeld=pyfeld.rfcmd:run_main'
         ],
     }
 )

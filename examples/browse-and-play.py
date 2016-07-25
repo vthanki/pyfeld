@@ -7,7 +7,7 @@ import sys
 
 import subprocess
 
-from pyfeld import DirBrowse
+from dirBrowse import DirBrowse
 
 returnString = None
 

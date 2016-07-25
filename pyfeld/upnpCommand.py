@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+from __future__ import unicode_literals
 
 import json
 
@@ -209,7 +210,7 @@ class UpnpCommand:
     def scan_browse_result(self, result, level, output_format='plain'):
         if output_format == 'plain':
             s = ""
-            xml_root = minidom.parseString(result['Result'])
+            xml_root = minidom.parseString(result['Result'].encode('utf-8'))
             container_list = xml_root.getElementsByTagName("container")
             for container in container_list:
                 dict = DidlInfo.extract_from_node(container, True)

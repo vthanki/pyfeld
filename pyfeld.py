@@ -256,8 +256,9 @@ def discover():
         zones_handler.publish_state()
     get_raumfeld_infrastructure()
 
-def main(argv):
+def run_main():
     global quick_access
+    argv = sys.argv
     verbose = 0
     if len(sys.argv) < 2:
         usage(sys.argv)
@@ -422,4 +423,4 @@ def main(argv):
 #    pp.pprint(result)
 
 if __name__ == "__main__":
-    main(sys.argv)
+    run_main()

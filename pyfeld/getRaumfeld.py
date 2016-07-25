@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 # GET https://172.31.0.102:48366/raumfeldSetup/v1/device
 # IPs used for X-AuthKey: Server IP: 172.31.0.102 - Local IP: 172.31.0.100

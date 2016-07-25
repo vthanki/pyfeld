@@ -9,6 +9,7 @@ from upnpCommand import UpnpCommand
 import urllib3
 from didlInfo import DidlInfo
 
+
 class RaumfeldZone:
 
     def __init__(self, udn):
@@ -16,9 +17,11 @@ class RaumfeldZone:
         self.media = None
         self.soap_host = None
         self.upnpcmd = None
+        self.volume = "0"
 
         self.state_variables = StateVariables(udn)
         self.position = None
+        self.terminate_loop = False
 
         self.rooms = []
         #i think better to use states(fading, looping, magic, intermezzo

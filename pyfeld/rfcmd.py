@@ -1,27 +1,21 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+from __future__ import unicode_literals
 
-import errno
 import json
-import os
-import pprint
 import sys
 import urllib
 from settings import Settings
 
 
 from upnpCommand import UpnpCommand
-from xml.dom import minidom
 from getRaumfeld import RaumfeldDeviceSettings
 from zonesHandler import ZonesHandler
-from xmlHelper import XmlHelper
 from time import sleep
 from didlInfo import DidlInfo
 
-from dataPacker import DataPacker
-
 quick_access = dict()
 raumfeld_host_device = None
+
 
 def get_raumfeld_infrastructure():
     global quick_access, raumfeld_host_device
@@ -44,6 +38,7 @@ def get_raumfeld_infrastructure():
 most stuff is already in the zone handler, this needs some tidy up
 '''
 
+
 def get_room_udn(room_name):
     global quick_access
     for zone in quick_access['zones']:
@@ -52,6 +47,7 @@ def get_room_udn(room_name):
                 if room['name'] == room_name:
                     return room['udn']
     return None
+
 
 def get_room_zone_index(room_name):
     global quick_access
@@ -63,6 +59,7 @@ def get_room_zone_index(room_name):
                     return index
         index += 1
     return -1
+
 
 def usage(argv):
     print("Usage: " + argv[0] + " [OPTIONS] [COMMAND] {args}")
@@ -98,6 +95,7 @@ def usage(argv):
     print("  addtozone {room(s)}      add rooms to existing zone")
     print("  drop {room(s)}           drop rooms from it's zone")
 
+
 def build_dlna_play_container(udn, server_type, path):
     s = "dlna-playcontainer://" + urllib.parse.quote(udn)
     s += "?"
@@ -106,12 +104,14 @@ def build_dlna_play_container(udn, server_type, path):
     s += '&md=0'
     return s
 
+
 def build_dlna_play_single(udn, server_type, path):
     s = "dlna-playsingle://" + urllib.parse.quote(udn)
     s += "?"
     s += 'sid=' + urllib.parse.quote(server_type)
     s += '&iid=' + urllib.parse.quote(path)
     return s
+
 
 def get_rooms(verbose):
     global quick_access
@@ -146,6 +146,7 @@ def get_didl_extract(didl_result, format="plain"):
         result += items['rfsourceID'] + "\n"
     return result
 
+
 def get_specific_zoneinfo(uc):
     results = uc.get_position_info()
     result = ""
@@ -160,6 +161,7 @@ def get_specific_zoneinfo(uc):
     if 'TrackMetaData' in results:
         result += get_didl_extract(results['TrackMetaData'])
     return result
+
 
 def get_info(verbose):
     i = 0
@@ -248,6 +250,7 @@ def fade_operation(uc, time, volume_start, volume_end):
     uc.set_volume(volume_end)
     return "done"
 
+
 def discover():
     zones_handler = ZonesHandler()
     if not zones_handler.reprocess():
@@ -256,8 +259,10 @@ def discover():
         zones_handler.publish_state()
     get_raumfeld_infrastructure()
 
-def main(argv):
+
+def run_main():
     global quick_access
+    argv = sys.argv
     verbose = 0
     if len(sys.argv) < 2:
         usage(sys.argv)
@@ -415,11 +420,11 @@ def main(argv):
         usage(sys.argv)
 
     if format == "plain":
-        print(result)
+        print(result.encode('UTF-8'))
     else:
-        print(result)
+        print(result.encode('UTF-8'))
 #    pp = pprint.PrettyPrinter(indent=4, width=160)
 #    pp.pprint(result)
 
 if __name__ == "__main__":
-    main(sys.argv)
+    run_main()

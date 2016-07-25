@@ -1,4 +1,4 @@
-
+from __future__ import unicode_literals
 import urllib3
 from xml.dom import minidom
 from upnpsoap import UpnpSoap

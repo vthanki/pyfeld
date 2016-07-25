@@ -28,17 +28,15 @@ class DirBrowse:
 
     @staticmethod
     def split_browse(lines, nextline):
-        print(nextline)
-        result = re.match('^([C+]) (.*) \\*(.*)$', nextline)
+        result = re.match('^([C+]) (.*) \\*(.*)$', str(nextline, 'utf-8'))
         if result:
             type_string = ""
             if result.group(1) == 'C':
                 type_string = "D"  #directory (container)
             if result.group(1) == '+':
                 type_string = "F"  #file (track)
-            path = result.group(2).encode('utf-8')
-            friendly_name = result.group(3)
-            lines.append([type_string.encode('utf-8'), path, friendly_name])
+            #would be better to not use an anonymous array
+            lines.append([type_string, result.group(2), result.group(3)])
 
     def enter(self, index):
         self.path = self.dirs[self.depth].items[index][1]
@@ -60,8 +58,6 @@ class DirBrowse:
 
     def retrieve(self, path):
         command = rfCmd()+' "' + path + '"'
-        print(command)
-
         try:
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except Exception as e:

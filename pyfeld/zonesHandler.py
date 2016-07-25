@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import json
 import re
 import subprocess
 import sys
 import syslog
-import threading
 from pprint import pprint
-from time import strptime, sleep, time
-from datetime import datetime
 from xml.dom import minidom
 import hashlib
 
@@ -38,7 +36,6 @@ class ZonesHandler:
     media_servers = set()
     config_device = set()
     raumfeld_device = set()
-
 
     def __init__(self):
         self.events_count = 0
@@ -515,7 +512,6 @@ class ZonesHandler:
         return None
 
     def set_subscription_values(self, udn, xml_lastchange):
-        # print(xml_lastchange.toprettyxml())
         state_var_items = XmlHelper.xml_extract_dict_by_val(xml_lastchange,
                                                             ['TransportState',
                                                              'AVTransportURIMetaData',
@@ -607,7 +603,6 @@ class ZonesHandler:
             except Exception as e:
                 pass
             device_list.append(device_dict)
-
 
         values['devices'] = device_list
 

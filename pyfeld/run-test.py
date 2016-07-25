@@ -1,5 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+from __future__ import unicode_literals
+
 import re
 import subprocess
 import sys
@@ -19,7 +20,7 @@ def split_browse(lines, nextline):
         lines.append([type_string, result.group(2), result.group(3)])
 
 def retrieve(cmd):
-    command = '../src/rfcmd.py '+cmd
+    command = 'pyfeld '+cmd
     print(command)
     try:
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -30,7 +31,7 @@ def retrieve(cmd):
         nextline = process.stdout.readline()
         if len(nextline) == 0 and process.poll() != None:
             break
-        lines += str(nextline, "UTF-8")
+        lines += nextline.decode('utf-8')
     return lines
 
 
@@ -87,8 +88,13 @@ def browse():
     dir_browser.enter(1)
     show_dir(dir_browser)
 
-    print("Going to enter the fourth folder")
-    dir_browser.enter(4)
+    print("Going to enter the next folder")
+    dir_browser.enter(1)
+    print(dir_browser.path)
+    show_dir(dir_browser)
+
+    print("Going to enter the next folder")
+    dir_browser.enter(1)
     print(dir_browser.path)
     show_dir(dir_browser)
 
