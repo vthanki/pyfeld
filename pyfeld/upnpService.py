@@ -35,7 +35,7 @@ class UpnpService:
 
     def set_location(self, location):
         self.xml_location = location
-        result = urlparse(location)
+        result = urllib3.util.parse_url(location)
         self.network_location = result.netloc
         self.services_list = Services.get_services_from_location(location)
 

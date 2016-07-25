@@ -90,7 +90,7 @@ class RaumfeldZone:
             self.soap_host = None
             self.upnpcmd = None
             return
-        urlsplit = urlparse(host)
+        urlsplit = urllib3.util.parse_url(host)
         self.soap_host = urlsplit.scheme + "://"+urlsplit.netloc
         self.upnpcmd = UpnpCommand(self.soap_host)
 
