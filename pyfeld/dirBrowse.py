@@ -1,11 +1,12 @@
 #!/usr/bin/env python
+
 from __future__ import unicode_literals
 
 import re
 import subprocess
-
 def rfCmd():
     return 'pyfeld browse'
+
 
 class DirLevel:
     def __init__(self, path, friendly_name, items):
@@ -28,7 +29,6 @@ class DirBrowse:
 
     @staticmethod
     def split_browse(lines, nextline):
-        print(nextline)
         result = re.match('^([C+]) (.*) \\*(.*)$', nextline)
         if result:
             type_string = ""
@@ -38,7 +38,7 @@ class DirBrowse:
                 type_string = "F"  #file (track)
             path = result.group(2).encode('utf-8')
             friendly_name = result.group(3)
-            lines.append([type_string.encode('utf-8'), path, friendly_name])
+            lines.append([type_string, path, friendly_name])
 
     def enter(self, index):
         self.path = self.dirs[self.depth].items[index][1]
@@ -59,9 +59,11 @@ class DirBrowse:
         self.path = self.dirs[self.depth].path
 
     def retrieve(self, path):
-        command = rfCmd()+' "' + path + '"'
-        print(command)
-
+        command = rfCmd()
+        if type(path).__name__ == 'bytes':
+            command += ' "' + path.decode('utf-8') + '"'
+        else:
+            command += ' "' + path + '"'
         try:
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         except Exception as e:
@@ -71,7 +73,7 @@ class DirBrowse:
             nextline = process.stdout.readline()
             if len(nextline) == 0 and process.poll() != None:
                 break
-            self.split_browse(lines, nextline)
+            self.split_browse(lines, nextline.decode('utf-8'))
         return lines
 
     def get_friendly_path_name(self, separator=" -> "):

@@ -418,9 +418,8 @@ def run_main():
     else:
         usage(sys.argv)
 
-    sys.stdout.write(result)
-#    pp = pprint.PrettyPrinter(indent=4, width=160)
-#    pp.pprint(result)
+    sys.stdout.write(str(result))
+    sys.stdout.write('\n')
 
 if __name__ == "__main__":
     run_main()

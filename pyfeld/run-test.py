@@ -9,16 +9,6 @@ from time import sleep
 from pyfeld.dirBrowse import DirBrowse
 
 
-def split_browse(lines, nextline):
-    result = re.match('^([C+]) (.*) \\*(.*)$', str(nextline, 'utf-8'))
-    if result:
-        type_string = ""
-        if result.group(1) == 'C':
-            type_string = "D"  # directory (container)
-        if result.group(1) == '+':
-            type_string = "F"  # file (track)
-        lines.append([type_string, result.group(2), result.group(3)])
-
 def retrieve(cmd):
     command = 'pyfeld '+cmd
     print(command)

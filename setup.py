@@ -15,7 +15,7 @@ if os.path.exists(s):
 
 setup(
     name='pyfeld',
-    version='0.0.1a0',
+    version='0.0.6a0',
     author='Jürgen Schwietering',
     author_email='scjurgen@yahoo.com',
     description='Raumfeld controlled by python scripts',
@@ -23,7 +23,7 @@ setup(
     license='MIT',
     keywords='raumfeld wlan-speakers loudspeakers upnp audio media',
     url='http://github.com/scjurgen/pyfeld',
-    packages=['pyfeld', 'examples'],
+    packages=['pyfeld'],
     include_package_data=True,
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -32,10 +32,8 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'Topic :: Utilities',
         'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     py_modules=['pyfeld','DirBrowse'],
     # https://packaging.python.org/en/latest/requirements.html
@@ -43,6 +41,7 @@ setup(
     #    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     entry_points={
         'console_scripts': [
+            'pyfeld-browse=pyfeld.browseRF:run_main',
             'pyfeld=pyfeld.rfcmd:run_main'
         ],
     }

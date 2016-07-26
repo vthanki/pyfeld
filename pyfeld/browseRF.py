@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
+from __future__ import unicode_literals
 
 import curses
 import re
@@ -7,7 +7,7 @@ import sys
 
 import subprocess
 
-from dirBrowse import DirBrowse
+from pyfeld.dirBrowse import DirBrowse
 
 returnString = None
 
@@ -154,14 +154,17 @@ def test_dir():
     show_dir(dir_browser)
 
 
-
-
-def main(argv):
+def run_main():
     global returnString
+    argv = sys.argv[1:]
     if len(argv) == 1:
         if argv[0] == 'test':
             test_dir()
-            return;
+            return
+        if argv[0] == '--help':
+            print("Usage:")
+            print("--zonewithroom {room}")
+            return
     with MainGui() as gui:
         inroom = None
         if len(argv) >= 1:
@@ -170,8 +173,11 @@ def main(argv):
                 gui.set_room(argv[1])
         returnString = gui.run_main_loop()
 
+
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    run_main()
 
 if returnString is not None:
-    print(returnString)
+    sys.stdout.write(returnString.decode('utf-8'))
+    sys.stdout.write('\n')
+

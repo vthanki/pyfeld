@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 import json
 import requests
 import sys
+import html
+
 from xml.dom import minidom
 
 from pyfeld.xmlHelper import XmlHelper
@@ -132,8 +134,8 @@ class UpnpCommand:
                     add_uri = data['TrackURI']
 
         send_data += "<CurrentURI><![CDATA[" + add_uri + "]]></CurrentURI>"
-        send_data += "<CurrentURIMetaData>" + html.escape(data['CurrentURIMetaData']) + "</CurrentURIMetaData>"
-        # + html.escape(data['CurrentURIMetaData']) +
+        send_data += "<CurrentURIMetaData>" + cgi.escape(data['CurrentURIMetaData']) + "</CurrentURIMetaData>"
+        # + cgi.escape(data['CurrentURIMetaData']) +
         print(data['CurrentURIMetaData'])
         xmlroot = self.host_send_transport("SetAVTransportURI", send_data)
         return XmlHelper.xml_extract_dict(xmlroot, ['SetAVTransportURI'])
