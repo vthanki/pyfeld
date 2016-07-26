@@ -6,7 +6,7 @@ import subprocess
 import sys
 from time import sleep
 
-from dirBrowse import DirBrowse
+from pyfeld.dirBrowse import DirBrowse
 
 
 def split_browse(lines, nextline):

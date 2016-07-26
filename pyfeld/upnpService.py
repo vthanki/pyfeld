@@ -1,8 +1,11 @@
 from __future__ import unicode_literals
+
 import urllib3
+
 from xml.dom import minidom
-from upnpsoap import UpnpSoap
-from xmlHelper import XmlHelper
+
+from pyfeld.upnpsoap import UpnpSoap
+from pyfeld.xmlHelper import XmlHelper
 
 
 class Services:

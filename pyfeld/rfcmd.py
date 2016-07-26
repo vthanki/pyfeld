@@ -4,14 +4,13 @@ from __future__ import unicode_literals
 import json
 import sys
 import urllib
-from settings import Settings
-
-
-from upnpCommand import UpnpCommand
-from getRaumfeld import RaumfeldDeviceSettings
-from zonesHandler import ZonesHandler
 from time import sleep
-from didlInfo import DidlInfo
+
+from pyfeld.settings import Settings
+from pyfeld.upnpCommand import UpnpCommand
+from pyfeld.getRaumfeld import RaumfeldDeviceSettings
+from pyfeld.zonesHandler import ZonesHandler
+from pyfeld.didlInfo import DidlInfo
 
 quick_access = dict()
 raumfeld_host_device = None
@@ -419,10 +418,7 @@ def run_main():
     else:
         usage(sys.argv)
 
-    if format == "plain":
-        print(result.encode('UTF-8'))
-    else:
-        print(result.encode('UTF-8'))
+    sys.stdout.write(result)
 #    pp = pprint.PrettyPrinter(indent=4, width=160)
 #    pp.pprint(result)
 

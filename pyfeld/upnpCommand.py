@@ -2,14 +2,12 @@
 from __future__ import unicode_literals
 
 import json
-
 import requests
 import sys
-
 from xml.dom import minidom
-from xmlHelper import XmlHelper
 
-from didlInfo import DidlInfo
+from pyfeld.xmlHelper import XmlHelper
+from pyfeld.didlInfo import DidlInfo
 
 
 class UpnpCommand:

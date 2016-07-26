@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from upnpService import UpnpService
+from pyfeld.upnpService import UpnpService
 
 class Room:
     def __init__(self, udn, renderer_udn, name, location):

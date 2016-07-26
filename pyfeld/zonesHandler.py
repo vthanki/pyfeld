@@ -9,17 +9,17 @@ from pprint import pprint
 from xml.dom import minidom
 import hashlib
 
-from errorPrint import err_print
-from getRaumfeld import RaumfeldDeviceSettings, HostDevice
-from raumfeldZone import RaumfeldZone
-from room import Room
-from upnpCommand import UpnpCommand
-from upnpService import UpnpService
-from upnpsoap import UpnpSoap
+from pyfeld.errorPrint import err_print
+from pyfeld.getRaumfeld import RaumfeldDeviceSettings, HostDevice
+from pyfeld.raumfeldZone import RaumfeldZone
+from pyfeld.room import Room
+from pyfeld.upnpCommand import UpnpCommand
+from pyfeld.upnpService import UpnpService
+from pyfeld.upnpsoap import UpnpSoap
 
-from xmlHelper import XmlHelper
+from pyfeld.xmlHelper import XmlHelper
 
-from settings import Settings
+from pyfeld.settings import Settings
 
 
 class MediaDevice:
