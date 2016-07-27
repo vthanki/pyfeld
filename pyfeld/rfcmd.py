@@ -270,9 +270,7 @@ def run_main():
     mediaIndex = 0
     room = ""
     format = "plain"
-
     argpos = 1
-
     get_raumfeld_infrastructure()
 
     while sys.argv[argpos].startswith('-'):

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import json
 import requests
 import sys
-import html
+import cgi 
 
 from xml.dom import minidom
 
@@ -172,7 +172,7 @@ class UpnpCommand:
         browseData = "<ContainerID>" + path + "</ContainerID>" \
                      + "<SearchCriteria>" + search_string + "</SearchCriteria>" \
                      + "<Filter>*</Filter>" \
-                     + "<StartingIndex>1</StartingIndex>" \
+                     + "<StartingIndex>0</StartingIndex>" \
                      + "<RequestedCount>0</RequestedCount>" \
                      + "<SortCriteria>dc:title</SortCriteria>"
         xmlroot = self.host_send_contentdirectory("Search", browseData)

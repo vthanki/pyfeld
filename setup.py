@@ -15,7 +15,7 @@ if os.path.exists(s):
 
 setup(
     name='pyfeld',
-    version='0.0.6a0',
+    version='0.0.8a0',
     author='Jürgen Schwietering',
     author_email='scjurgen@yahoo.com',
     description='Raumfeld controlled by python scripts',
