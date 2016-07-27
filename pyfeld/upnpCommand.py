@@ -142,9 +142,13 @@ class UpnpCommand:
 
     '''Rendering service'''
 
-    def get_volume(self):
+    def get_volume(self, format = 'plain'):
         xmlroot = self.host_send_rendering("GetVolume", '<InstanceID>0</InstanceID><Channel>Master</Channel>')
-        return XmlHelper.xml_extract_dict(xmlroot, ['CurrentVolume'])
+        dict = XmlHelper.xml_extract_dict(xmlroot, ['CurrentVolume'])
+        if format == 'json':
+            return '{ "CurrentVolume": "'+dict['CurrentVolume'] + '"}'
+        else:
+            return dict['CurrentVolume']
 
     def set_volume(self, value):
         xmlroot = self.host_send_rendering("SetVolume",

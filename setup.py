@@ -15,7 +15,7 @@ if os.path.exists(s):
 
 setup(
     name='pyfeld',
-    version='0.0.8a0',
+    version='0.0.9a0',
     author='Jürgen Schwietering',
     author_email='scjurgen@yahoo.com',
     description='Raumfeld controlled by python scripts',
@@ -35,7 +35,7 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ],
-    py_modules=['pyfeld','DirBrowse'],
+    #py_modules=['pyfeld','DirBrowse'],
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=['requests', 'readchar'],
     #    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
