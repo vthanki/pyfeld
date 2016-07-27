@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import unicode_literals
 
 import json
@@ -71,7 +71,7 @@ def get_room_zone_index(room_name):
 
 def usage(argv):
     print("Usage: " + argv[0] + " [OPTIONS] [COMMAND] {args}")
-    print("Version: 0.3")
+    print("Version: 0.1.2a0")
     print("OPTIONS: ")
     print("  -j,--json               use json as output format, default is plain text lines")
     print("  -d,--discover           Discover again (will be fast if host didn't change)")
@@ -131,7 +131,7 @@ def is_unassigned_room(roomName):
                         return True
     return False
 
-def get_unassigned_rooms(verbose):
+def get_unassigned_rooms(verbose, format):
     global quick_access
 
     result = ""
@@ -207,7 +207,7 @@ def get_info(verbose, format):
     global quick_access
     if format == 'json':
         quick_access
-        return json.dumps(quick_access) + "\n"
+        return json.dumps(quick_access, sort_keys=True, indent=2) + "\n"
     else:
         i = 0
         result = ""
@@ -240,12 +240,7 @@ def get_info(verbose, format):
 def get_zone_info(format):
     result = ""
     if format == 'json':
-        result = "["
-        for zone in quick_access['zones']:
-            if zone['rooms'] is not None:
-                if zone['name'] != "unassigned room":
-                    result += '"' + zone['name'] + '",'
-        result = result[:-1] + "]\n"
+        result = json.dumps(quick_access['zones'], sort_keys=True, indent=2) + "\n"
     else:
         for zone in quick_access['zones']:
             if zone['rooms'] is not None:
@@ -317,7 +312,7 @@ def run_main():
     global quick_access
     argv = list()
     for arg in sys.argv:
-        argv.append(arg.decode('utf-8'))
+        argv.append(arg)
     verbose = 0
     if len(argv) < 2:
         usage(argv)
@@ -411,19 +406,15 @@ def run_main():
     elif operation == 'position':
         results = uc.get_position_info()
         if format == 'json':
-            result = "{"
-            if 'TrackDuration' in results:
-                result += '"TrackDuration": ' + '"' + results['TrackDuration'] + '", '
-            else:
-                result += '"TrackDuration": ' + '"n/a", '
-            if 'AbsTime' in results:
-                result += '"AbsTime": ' + '"' + results['AbsTime'] + '"'
-            else:
-                result += '"AbsTime": ' + '"n/a"'
-            result += "}"
+            return json.dumps(results,  sort_keys=True, indent=2) + '\n'
         else:
-            if 'TrackMetaData' in results:
-                result['TrackMetaData'] = results['TrackMetaData']
+            result = ""
+            if 'TrackDuration' in results:
+                result += str(results['TrackDuration'])
+            result += '\n'
+            if 'AbsTime' in results:
+                result += str(results['AbsTime'])
+            result += '\n'
     elif operation == 'seek':
         #check argv[argpos] if contains :
         result = uc.seek(argv[argpos])
@@ -487,7 +478,7 @@ def run_main():
     else:
         usage(argv)
 
-    sys.stdout.write(result.encode('utf-8'))
+    sys.stdout.write(result)
     sys.stdout.write('\n')
 
 if __name__ == "__main__":

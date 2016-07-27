@@ -8,14 +8,16 @@ from os import path
 
 long_description = 'Raumfeld controlled by python scripts'
 here = path.abspath(path.dirname(__file__))
-s = path.join(here, 'README.txt')
+s = path.join(here, 'README.rst')
 
 if os.path.exists(s):
-    long_description = open('README.txt').read()
+    long_description = open('README.rst').read()
+else:
+    print("cant open readme.rst")
 
 setup(
     name='pyfeld',
-    version='0.0.9a0',
+    version='0.1.2a0',
     author='Jürgen Schwietering',
     author_email='scjurgen@yahoo.com',
     description='Raumfeld controlled by python scripts',
@@ -32,7 +34,6 @@ setup(
         'Topic :: Software Development :: Build Tools',
         'Topic :: Utilities',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ],
     #py_modules=['pyfeld','DirBrowse'],
